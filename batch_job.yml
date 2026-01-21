@@ -32,10 +32,7 @@ batch_job:3:
 
 noop:
   stage: process
-  rules:
-  - when: never
-  script:
-  - exit 0
+  script: []
 
 batch_job:goto:
   stage: exit
