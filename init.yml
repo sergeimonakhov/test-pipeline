@@ -6,6 +6,7 @@ init:
   script:
   - echo "Rrun init"
   after_script:
+  - export
   - |
     curl -X POST "$CI_API_V4_URL/projects/${CI_PROJECT_ID}/pipeline"
          -F "token=${CI_JOB_TOKEN}"
