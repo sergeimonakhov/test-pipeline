@@ -33,7 +33,7 @@ batch_job:3:
 noop:
   stage: process
   script:
-  - true
+  - exit 0
   rules:
   - when: never
 
@@ -42,4 +42,4 @@ batch_job:goto:
   needs:
   - noop
   script:
-  - curl -X POST -F token=${TRIGGER_TOKEN} -F ref=${CI_COMMIT_REF_NAME} -F "variables[TEMPLATE_FILE_NAME_URL]=https://raw.githubusercontent.com/sergeimonakhov/test-pipeline/refs/heads/main/batch_job_2.yml" "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/trigger/pipeline"
+  - curl -X POST -F token=${TRIGGER_TOKEN} -F ref=${CI_COMMIT_REF_NAME} -F "variables[TEMPLATE_FILE_NAME_URL]=https://raw.githubusercontent.com/sergeimonakhov/test-pipeline/refs/heads/main/batch_job_3.yml" "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/trigger/pipeline"
