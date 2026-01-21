@@ -39,7 +39,4 @@ batch_job:goto:
   needs:
   - noop
   script:
-  - curl -X POST "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/trigger/pipeline" \
-         -F "token=${TRIGGER_TOKEN}" \
-         -F "ref=${CI_COMMIT_REF_NAME}" \
-         -F "variables[TEMPLATE_FILE_NAME_URL]=https://raw.githubusercontent.com/sergeimonakhov/test-pipeline/refs/heads/main/batch_job.yml"
+  - curl -X POST -F token=${TRIGGER_TOKEN} -F ref=${CI_COMMIT_REF_NAME} -F "variables[TEMPLATE_FILE_NAME_URL]=https://raw.githubusercontent.com/sergeimonakhov/test-pipeline/refs/heads/main/batch_job.yml" "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/trigger/pipeline"
