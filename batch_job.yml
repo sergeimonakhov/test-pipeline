@@ -1,0 +1,48 @@
+stages:
+- start
+- process
+- exit
+
+batch_job:1:
+  stage: start
+  script:
+    #- python extract_and_decide.py
+    - echo "Run batch_job:1"
+  #artifacts:
+  #  paths:
+  #    - output/
+
+batch_job:2:
+  stage: start
+  script:
+    #- python extract_and_decide.py
+    - echo "Run batch_job:2"
+  #artifacts:
+  #  paths:
+  #    - output/
+
+batch_job:3:
+  stage: start
+  script:
+    #- python extract_and_decide.py
+    - echo "Run batch_job:3"
+  #artifacts:
+  #  paths:
+  #    - output/
+
+noop:
+  stage: process
+  rules:
+  - when: never
+  script:
+  - exit 0
+
+batch_job:goto:
+  stage: exit
+  needs:
+  - noop
+  script:
+  - curl -X POST "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/pipeline" \
+         -F "token=${CI_JOB_TOKEN}" \
+         -F "ref=${CI_COMMIT_REF_NAME}" \
+         -F "variables[CI_TEMPLATE_FILE_NAME]=batch_job.yml"
